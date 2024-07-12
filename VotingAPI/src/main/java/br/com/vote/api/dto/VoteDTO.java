@@ -1,7 +1,13 @@
 package br.com.vote.api.dto;
 
-public class VoteDTO {
+import java.io.Serializable;
 
+import org.springframework.hateoas.RepresentationModel;
+
+public class VoteDTO extends RepresentationModel<VoteDTO> implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	private Long sessionId;
 	private Long yesVote;
 	private Long noVote;

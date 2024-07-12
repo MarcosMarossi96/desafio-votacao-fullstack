@@ -1,10 +1,19 @@
 package br.com.vote.api.form;
 
+import java.sql.Date;
+
+import jakarta.validation.constraints.NotNull;
+
 public class VoteForm {
 
+	@NotNull
 	private boolean vote;
+	@NotNull
 	private Long sessionId;
+	@NotNull
 	private Long associateId;
+	@NotNull
+	private Date currentDate;
 
 	public boolean isVote() {
 		return vote;
@@ -28,6 +37,14 @@ public class VoteForm {
 
 	public void setAssociateId(Long associateId) {
 		this.associateId = associateId;
+	}
+	
+	public Date getCurrentDate() {
+		return currentDate;
+	}
+	
+	public void setCurrentDate(Date currentDate) {
+		this.currentDate = currentDate;
 	}
 
 }

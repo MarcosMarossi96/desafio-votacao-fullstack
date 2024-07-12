@@ -2,10 +2,15 @@ package br.com.vote.api.form;
 
 import java.util.Date;
 
+import jakarta.validation.constraints.NotNull;
+
 public class SessionForm {
 
+	@NotNull
 	private Date start;
+	@NotNull
 	private Date end;
+	@NotNull
 	private Long agendaId;
 
 	public Date getStart() {

@@ -1,6 +1,8 @@
 package br.com.vote.api.controller.advice;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ApiErrorMessage {
 
@@ -8,6 +10,7 @@ public class ApiErrorMessage {
 	private String description;
 	private Date timestamp;
 	private String statusCode;
+	private List<String> errors;
 	
 	public ApiErrorMessage() {
 	
@@ -20,10 +23,19 @@ public class ApiErrorMessage {
 	}
 	
 	public ApiErrorMessage(String message, String description, Date timestamp, String statusCode) {
+		this.errors = new ArrayList<>();
 		this.message = message;
 		this.description = description;
 		this.timestamp = timestamp;
 		this.statusCode = statusCode;
+	}
+	
+	public ApiErrorMessage(String message, String description, Date timestamp, String statusCode, List<String> errors) {
+		this.message = message;
+		this.description = description;
+		this.timestamp = timestamp;
+		this.statusCode = statusCode;
+		this.errors = errors;
 	}
 
 	public String getMessage() {
@@ -56,6 +68,14 @@ public class ApiErrorMessage {
 
 	public void setStatusCode(String statusCode) {
 		this.statusCode = statusCode;
+	}
+
+	public List<String> getErrors() {
+		return errors;
+	}
+
+	public void setErrors(List<String> errors) {
+		this.errors = errors;
 	}
 
 }

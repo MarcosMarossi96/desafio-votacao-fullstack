@@ -1,5 +1,6 @@
 package br.com.vote.api.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -13,7 +14,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "session")
-public class Session {
+public class Session implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
