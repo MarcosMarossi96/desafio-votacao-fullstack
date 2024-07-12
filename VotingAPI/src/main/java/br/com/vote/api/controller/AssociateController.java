@@ -1,5 +1,7 @@
 package br.com.vote.api.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -34,6 +36,8 @@ import jakarta.validation.Valid;
 @Tag(name = "Associate", description = "Endpoints for associates")
 public class AssociateController {
 	
+	private static Logger logger = LoggerFactory.getLogger(AssociateController.class);
+	
 	@Autowired
 	private AssociateService associateService;
 	
@@ -45,7 +49,11 @@ public class AssociateController {
 			@ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorMessage.class)) }), })
 	public ResponseEntity<?> createNewAssociate(@Valid @RequestBody AssociateForm associateForm) {
+		logger.info("Initializing the creation of a new associate.");
+		
 		associateService.createNewAssociate(associateForm);
+		
+		logger.info("Successfully finalizing associate creation.");
 		return new ResponseEntity<>(HttpStatus.CREATED);		
 	}
 	
@@ -62,11 +70,14 @@ public class AssociateController {
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "limit", defaultValue = "10") Integer limit,
 			@RequestParam(value = "direction", defaultValue = "asc") String direction) {
+		logger.info("Initiating the search for registered associates.");
 		
 		var sortDirection = direction.equalsIgnoreCase("desc") ? Direction.DESC : Direction.ASC;
 		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "title"));
-
-		return associateService.findAll(pageable);
+		PagedModel<EntityModel<AssociateDTO>> associates = associateService.findAll(pageable);
+		
+		logger.info("Successfully finalizing the associates searches.");
+		return associates;
 	}
 
 	@GetMapping(path = "/{id}")
@@ -79,8 +90,13 @@ public class AssociateController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorMessage.class)) }),
 			@ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorMessage.class)) }), })
-	public AssociateDTO findById(@PathVariable(name = "id") Long id) {		
-		return associateService.findById(id);
+	public AssociateDTO findById(@PathVariable(name = "id") Long id) {
+		logger.info("Initializing associate search by ID.");
+		
+		AssociateDTO associateDTO = associateService.findById(id);
+		
+		logger.info("Successfully finalizing the associate search by ID.");
+		return associateDTO;
 	}
 	
 }

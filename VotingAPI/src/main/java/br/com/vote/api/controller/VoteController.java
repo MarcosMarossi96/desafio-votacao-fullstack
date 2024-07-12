@@ -1,5 +1,7 @@
 package br.com.vote.api.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,8 @@ import jakarta.validation.Valid;
 @Tag(name = "Vote", description = "Endpois to manage the vote")
 public class VoteController {
 	
+	private static Logger logger = LoggerFactory.getLogger(VoteController.class);
+	
 	@Autowired
 	private VoteService voteService;
 	
@@ -39,7 +43,11 @@ public class VoteController {
 			@ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorMessage.class)) }), })
 	public ResponseEntity<?> createNewVote(@Valid @RequestBody VoteForm form) {
+		logger.info("Initializing the creation of a new vote in the session " + form.getSessionId() + ".");
+		
 		voteService.createNewVote(form);
+		
+		logger.info("Successfully finalizing the vote in session " + form.getSessionId() + ".");
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
@@ -54,7 +62,11 @@ public class VoteController {
 			@ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorMessage.class)) }), })
 	public ResponseEntity<VoteDTO> findResult(@PathVariable Long sessionId) {
+		logger.info("Initiating the search for votes in session " + sessionId + ".");
+		
 		VoteDTO voteDTO = voteService.findResult(sessionId);
+		
+		logger.info("Successfully finalizing the search for votes in session " + sessionId + ".");
 		return new ResponseEntity<>(voteDTO, HttpStatus.OK);		
 	}
 	

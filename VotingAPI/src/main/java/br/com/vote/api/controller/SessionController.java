@@ -1,5 +1,7 @@
 package br.com.vote.api.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,8 @@ import jakarta.validation.Valid;
 @Tag(name = "Session", description = "Endpoints to manage the voting session")
 public class SessionController {
 	
+	private static Logger logger = LoggerFactory.getLogger(SessionController.class);
+	
 	@Autowired
 	private SessionService sessionService;
 
@@ -38,7 +42,11 @@ public class SessionController {
 			@ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorMessage.class)) }), })
 	public ResponseEntity<?> createNewAssociate(@Valid @RequestBody SessionForm form) {
+		logger.info("Initializing the creation of a new session.");
+		
 		Session newSession = sessionService.createNewSession(form);
+		
+		logger.info("Successfully finalizing session creation.");
 		return new ResponseEntity<>(newSession, HttpStatus.CREATED);		
 	}
 	

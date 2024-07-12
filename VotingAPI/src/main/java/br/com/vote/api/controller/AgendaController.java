@@ -1,5 +1,7 @@
 package br.com.vote.api.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -34,6 +36,8 @@ import jakarta.validation.Valid;
 @Tag(name = "Agenda", description = "Endpoints for the voting agenda")
 public class AgendaController {
 
+	private static Logger logger = LoggerFactory.getLogger(AgendaController.class);
+	
 	@Autowired
 	private AgendaService agendaService;
 
@@ -45,7 +49,11 @@ public class AgendaController {
 			@ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorMessage.class)) }), })
 	public ResponseEntity<?> createNewAssociate(@Valid @RequestBody AgendaForm form) {
+		logger.info("Initializing the creation of a new agenda.");
+		
 		agendaService.createNewAgenda(form);
+		
+		logger.info("Successfully finalizing agenda creation.");
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
@@ -61,11 +69,14 @@ public class AgendaController {
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "limit", defaultValue = "10") Integer limit,
 			@RequestParam(value = "direction", defaultValue = "asc") String direction) {
+		logger.info("Initiating the search for registered agendas.");
 		
 		var sortDirection = direction.equalsIgnoreCase("desc") ? Direction.DESC : Direction.ASC;
 		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "title"));
+		PagedModel<EntityModel<AgendaDTO>> agendas = agendaService.findAll(pageable);
 
-		return agendaService.findAll(pageable);
+		logger.info("Successfully finalizing the agenda searches.");
+		return agendas;
 	}
 
 	@GetMapping(path = "/{id}")
@@ -79,7 +90,12 @@ public class AgendaController {
 			@ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorMessage.class)) }), })
 	public AgendaDTO findById(@PathVariable(name = "id") Long id) {		
-		return agendaService.findById(id);
+		logger.info("Initializing agenda search by ID.");
+		
+		AgendaDTO agendaDTO = agendaService.findById(id);
+		
+		logger.info("Successfully finalizing the agenda search by ID.");
+		return agendaDTO;
 	}
 
 }
