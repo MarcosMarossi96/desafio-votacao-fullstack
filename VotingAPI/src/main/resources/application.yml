@@ -17,7 +17,7 @@ spring:
      max-request-size: 215MB
 
 application:
-    name: VoteAPI
+    name: VotingAPI
 
 server:
   servlet.context-path: /vote/v1

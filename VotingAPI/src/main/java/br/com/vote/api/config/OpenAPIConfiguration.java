@@ -1,4 +1,4 @@
-package br.com.vote.api;
+package br.com.vote.api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

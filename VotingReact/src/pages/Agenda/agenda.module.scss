@@ -1,0 +1,31 @@
+.agendaContent {
+    margin: 8px;
+    border: 1px solid var(--primary-color);
+    padding: 16px;
+    border-radius: 8px;
+
+    h3 {
+        font-size: 1rem;
+        text-transform: uppercase;
+        color: var(--primary-text-color);
+    }
+
+
+    p {
+        font-size: 1rem;
+        margin-top: 8px;
+        color: var(--secondary-text-color);
+    }
+
+    button {
+        margin-top: 8px;
+    }
+}
+
+.agendaContainer {
+    background-color: var(--white);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 16px;
+    padding: 16px;
+    border-radius: 12px;
+}

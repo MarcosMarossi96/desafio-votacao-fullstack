@@ -39,7 +39,7 @@ public class AssociateService {
 			throw new AssociateException("There is already a user registered with this CPF");
 		}
 
-		Associate associate = new Associate(form.getCpf());
+		Associate associate = CustomModelMapper.parseObject(form, Associate.class);
 		associateRepository.save(associate);
 	}
 

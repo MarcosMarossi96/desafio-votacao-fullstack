@@ -1,0 +1,23 @@
+.inputField {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.inputField:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.inputLabel {
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: var(--primary-text-color);
+    pointer-events: none;
+    margin-bottom: 8px;
+}

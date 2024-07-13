@@ -22,6 +22,9 @@ public class Associate implements Serializable {
 	@Column(nullable = false, length = 11, unique = true)
 	private String cpf;
 	
+	@Column(nullable = false, length = 100)
+	private String name;
+	
 	public Associate() {
 		
 	}
@@ -44,6 +47,14 @@ public class Associate implements Serializable {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

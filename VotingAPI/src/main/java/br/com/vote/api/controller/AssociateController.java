@@ -73,7 +73,7 @@ public class AssociateController {
 		logger.info("Initiating the search for registered associates.");
 		
 		var sortDirection = direction.equalsIgnoreCase("desc") ? Direction.DESC : Direction.ASC;
-		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "title"));
+		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "id"));
 		PagedModel<EntityModel<AssociateDTO>> associates = associateService.findAll(pageable);
 		
 		logger.info("Successfully finalizing the associates searches.");

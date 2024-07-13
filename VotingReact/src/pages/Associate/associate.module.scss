@@ -1,0 +1,11 @@
+.associateContent {
+    margin: 8px;
+    border: 1px solid var(--primary-color);
+    padding: 16px;
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+}
