@@ -3,6 +3,7 @@ package br.com.vote.api.integration.test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -61,8 +62,10 @@ public class AssociateControllerTest extends GenericTestContainer {
 		List<AssociateDTO> associates = wrapper.getEmbedded().getAssociates();
 		
 		assertFalse(associates.isEmpty());
-		assertEquals(1, associates.size());
-		assertFalse(associates.isEmpty());	
+		
+		for (AssociateDTO associateDTO : associates) {
+			assertTrue(associateDTO.getName().contains("Associate"));
+		}		
 	}
 
 	@Test
