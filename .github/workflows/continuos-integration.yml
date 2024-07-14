@@ -33,7 +33,7 @@ jobs:
         cache: maven
         
     - name: Build application JAR
-      working-directory: ./
+      working-directory: ./VotingAPI
       run: mvn clean package
 
     - name: Build docker compose
