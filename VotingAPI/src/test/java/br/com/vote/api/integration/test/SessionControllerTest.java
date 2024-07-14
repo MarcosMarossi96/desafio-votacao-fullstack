@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import br.com.vote.api.dto.CreatedDTO;
 import br.com.vote.api.dto.SessionDTO;
 import br.com.vote.api.form.AgendaForm;
 import br.com.vote.api.form.SessionForm;
@@ -21,22 +22,25 @@ import br.com.vote.api.mocks.SessionMock;
 public class SessionControllerTest extends GenericTestContainer {
 	
 	private SessionMock mock = new SessionMock();
+	private CreatedDTO createdAgendaDTO;
 	
 	@BeforeAll
 	public void setup() throws Exception {
 		AgendaMock mock = new AgendaMock();
 		AgendaForm mockForm = mock.mockForm();
 		
-		mockMvc.perform(MockMvcRequestBuilders.post("/agenda")
+		MvcResult agendaResponse = mockMvc.perform(MockMvcRequestBuilders.post("/agenda")
 				.content(mapper.writeValueAsString(mockForm))
 				.contentType(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isCreated());
+				.andDo(print()).andExpect(status().isCreated()).andReturn();
+		
+		this.createdAgendaDTO = mapper.readValue(agendaResponse.getResponse().getContentAsString(), CreatedDTO.class);	
 	}
 
 	@Test
 	@Order(1)
 	public void testcreateNewSessionSuccess() throws Exception {
-		SessionForm form = mock.mockForm(1);
+		SessionForm form = mock.mockForm(createdAgendaDTO.getId().intValue());
 		
 		mockMvc.perform(MockMvcRequestBuilders.post("/session")
 				.content(mapper.writeValueAsString(form))
