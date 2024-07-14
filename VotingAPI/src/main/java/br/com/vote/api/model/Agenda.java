@@ -24,7 +24,7 @@ public class Agenda implements Serializable {
 	
 	@Column(nullable = false)
 	private String description;
-	
+		
 	public Agenda() {
 		
 	}

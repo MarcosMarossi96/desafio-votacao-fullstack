@@ -4,10 +4,10 @@ import jakarta.validation.constraints.Size;
 
 public class AssociateForm {
 
-	@Size(min = 11, max = 11, message = "The CPF must contain 11 digits")
+	@Size(min = 11, max = 11, message = "O CPF deve conter somente 11 digitos")
 	private String cpf;
 	
-	@Size(min = 3, max = 100, message = "The name must contain between 3 and 100 digits")
+	@Size(min = 3, max = 100, message = "O nome deve conter no mínimo 3 e no máximo 100 digitos")
 	private String name;
 
 	public String getCpf() {

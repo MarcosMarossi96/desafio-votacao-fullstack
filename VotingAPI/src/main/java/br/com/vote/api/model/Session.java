@@ -9,7 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,13 +22,13 @@ public class Session implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
+	@Column(name = "start_date", nullable = false)
 	private Date start;
 
-	@Column(nullable = false)
+	@Column(name = "end_date", nullable = false)
 	private Date end;
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "agenda_id", nullable = false)
 	private Agenda agenda;
 

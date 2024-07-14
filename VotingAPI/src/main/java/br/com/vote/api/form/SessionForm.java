@@ -2,15 +2,19 @@ package br.com.vote.api.form;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.validation.constraints.NotNull;
 
 public class SessionForm {
 
-	@NotNull
+	@NotNull(message = "A data inicial da votação não pode ser vazia ou nula")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date start;
-	@NotNull
+	@NotNull(message = "A data final da votação não pode ser vazia ou nula")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date end;
-	@NotNull
+	@NotNull(message = "A sessão deve conter um identificador da pauta")
 	private Long agendaId;
 
 	public Date getStart() {

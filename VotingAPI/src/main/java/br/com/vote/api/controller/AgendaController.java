@@ -48,7 +48,7 @@ public class AgendaController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorMessage.class)) }),			
 			@ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorMessage.class)) }), })
-	public ResponseEntity<?> createNewAssociate(@Valid @RequestBody AgendaForm form) {
+	public ResponseEntity<?> createNewAgenda(@Valid @RequestBody AgendaForm form) {
 		logger.info("Initializing the creation of a new agenda.");
 		
 		agendaService.createNewAgenda(form);

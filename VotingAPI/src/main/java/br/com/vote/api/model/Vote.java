@@ -29,7 +29,7 @@ public class Vote implements Serializable {
     private Session session;
 
     @ManyToOne
-    @JoinColumn(name = "associate_id", nullable = false, unique = true)
+    @JoinColumn(name = "associate_id", nullable = false)
     private Associate associate;
     
     public Vote() {

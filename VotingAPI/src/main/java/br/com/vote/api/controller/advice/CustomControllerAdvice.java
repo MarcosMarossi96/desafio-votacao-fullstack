@@ -17,6 +17,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import br.com.vote.api.exception.AssociateException;
 import br.com.vote.api.exception.ResourceNotFoundException;
+import br.com.vote.api.exception.SessionException;
 import br.com.vote.api.exception.VoteException;
 
 @ControllerAdvice
@@ -55,6 +56,16 @@ public class CustomControllerAdvice {
 		return new ResponseEntity<>(em, status);		
 	}
 	
+	@ExceptionHandler(SessionException.class)
+	public ResponseEntity<ApiErrorMessage> handleSessionException(Exception ex, WebRequest request) {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		ApiErrorMessage em = new ApiErrorMessage(ex.getMessage(), request.getDescription(false), new Date(), String.valueOf(status.value()));
+		logger.error(ex.getMessage());
+		
+		return new ResponseEntity<>(em, status);		
+	}
+	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ApiErrorMessage> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest request) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
@@ -63,10 +74,10 @@ public class CustomControllerAdvice {
 		List<String> errors = new ArrayList<>();
 		
 		for (FieldError fieldError : allErrors) {
-			errors.add(fieldError.getField() + " " + fieldError.getDefaultMessage());
+			errors.add(fieldError.getDefaultMessage());
 		}
 		
-		String message = "Field validation error";
+		String message = "Ocorreu um erro na validação dos campos";
 		
 		ApiErrorMessage em = new ApiErrorMessage(message, request.getDescription(false), new Date(),
 				String.valueOf(status.value()), errors);

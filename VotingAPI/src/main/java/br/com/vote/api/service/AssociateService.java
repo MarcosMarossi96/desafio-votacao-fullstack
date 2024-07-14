@@ -36,7 +36,7 @@ public class AssociateService {
 		Optional<Associate> optionalAssociate = associateRepository.findByCpf(form.getCpf());
 
 		if (optionalAssociate.isPresent()) {
-			throw new AssociateException("There is already a user registered with this CPF");
+			throw new AssociateException("Já existe um associado cadastrado com este documento!");
 		}
 
 		Associate associate = CustomModelMapper.parseObject(form, Associate.class);
@@ -47,7 +47,7 @@ public class AssociateService {
 		Optional<Associate> associate = associateRepository.findById(id);
 
 		if (!associate.isPresent()) {
-			throw new ResourceNotFoundException("There is no associate with the id " + id);
+			throw new ResourceNotFoundException("Não existe nenhum associado com o identificador: " + id);
 		}
 
 		AssociateDTO associateDTO = CustomModelMapper.parseObject(associate.get(), AssociateDTO.class);

@@ -29,22 +29,28 @@ public class VoteService {
 	private AssociateRepository associateRepository;
 
 	public void createNewVote(VoteForm form) {
-		Optional<Associate> associate = associateRepository.findById(form.getAssociateId());
+		Optional<Associate> associate = associateRepository.findByCpf(form.getCpf());
 		
 		if(!associate.isPresent()) {
-			throw new ResourceNotFoundException("There is no associate with the id " + form.getAssociateId());
+			throw new ResourceNotFoundException("Não existe nenhum associado castrado com este documento");
 		}
 		
 		Optional<Session> session = sessionRepository.findById(form.getSessionId());
 		
 		if(!session.isPresent()) {
-			throw new ResourceNotFoundException("There is no session with the id " + form.getAssociateId());
+			throw new ResourceNotFoundException("Nenhuma sessão de votação foi aberta com o identificador: " + form.getSessionId());
 		}
 		
 		if(form.getCurrentDate().after(session.get().getEnd())) {
-			throw new VoteException("Voting session closed");
+			throw new VoteException("A sessão foi encerrada e não é mais possível votar!");
 		}
 		
+		Optional<Vote> voteResult = voteRepository.findByAssociateAndSession(associate.get(), session.get());
+		
+		if(voteResult.isPresent()) {
+			throw new VoteException("Já foi computado um voto com este documento na sessão " + form.getSessionId());
+		}
+				
 		Vote vote = new Vote(session.get(), associate.get(), form.isVote());		
 		voteRepository.save(vote);
 	}
@@ -53,7 +59,7 @@ public class VoteService {
 		Optional<Session> session = sessionRepository.findById(sessionId);		
 		
 		if(!session.isPresent()) {
-			throw new ResourceNotFoundException("There is no session with the id " + sessionId);
+			throw new ResourceNotFoundException("Nenhuma sessão de votação foi aberta com o identificador: " + sessionId);
 		}
 		
 		return voteRepository.findResultBySessionId(sessionId);

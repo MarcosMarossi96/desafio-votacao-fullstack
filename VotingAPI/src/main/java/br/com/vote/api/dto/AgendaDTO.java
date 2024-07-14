@@ -11,6 +11,8 @@ public class AgendaDTO extends RepresentationModel<AgendaDTO> implements Seriali
 	private Long id;
 	private String title;
 	private String description;
+	
+	private VoteDTO vote;
 
 	public String getDescription() {
 		return description;
@@ -34,6 +36,14 @@ public class AgendaDTO extends RepresentationModel<AgendaDTO> implements Seriali
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public VoteDTO getVote() {
+		return vote;
+	}
+
+	public void setVote(VoteDTO vote) {
+		this.vote = vote;
 	}
 
 }

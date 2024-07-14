@@ -1,18 +1,23 @@
 package br.com.vote.api.form;
 
-import java.sql.Date;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class VoteForm {
 
-	@NotNull
+	@NotNull(message = "O voto não pode ser nulo")
 	private boolean vote;
-	@NotNull
+	@NotNull(message = "A votação deve acontecer dentro de uma sessão")
 	private Long sessionId;
-	@NotNull
-	private Long associateId;
-	@NotNull
+	@NotNull(message = "O cpf não pode ser nulo")
+	@Size(min = 11, max = 11, message = "O CPF deve conter somente 11 digitos")
+	private String cpf;
+	@NotNull(message = "A data atual não pode ser nula")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date currentDate;
 
 	public boolean isVote() {
@@ -30,14 +35,6 @@ public class VoteForm {
 	public void setSessionId(Long sessionId) {
 		this.sessionId = sessionId;
 	}
-
-	public Long getAssociateId() {
-		return associateId;
-	}
-
-	public void setAssociateId(Long associateId) {
-		this.associateId = associateId;
-	}
 	
 	public Date getCurrentDate() {
 		return currentDate;
@@ -45,6 +42,14 @@ public class VoteForm {
 	
 	public void setCurrentDate(Date currentDate) {
 		this.currentDate = currentDate;
+	}
+	
+	public String getCpf() {
+		return cpf;
+	}
+	
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 }
