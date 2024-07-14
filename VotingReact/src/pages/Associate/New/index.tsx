@@ -6,6 +6,10 @@ import Input from "../../../components/Input";
 import api from "../../../services";
 import Header from "../../../components/Header";
 import Body from "../../../components/Body";
+import { AxiosError } from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import { ApiErrorMessage } from "../../../TS/error-interfaces";
+
 
 const NewAssociate = () => {
     const navigate = useNavigate();
@@ -21,18 +25,27 @@ const NewAssociate = () => {
         });
 
         await api.post('/associate', requestObject)
-
-        navigate("/associado")
+            .then(() => {
+                navigate("/associado")
+            })
+            .catch((error: AxiosError<ApiErrorMessage>) => {
+                const message = error?.response?.data.message || 'Ocorreu um erro no processamento!'
+                toast(message, {
+                    type: 'error',
+                })
+            })
     }
 
     return (
         <div>
             <Header pageTitle="Novo associado" />
 
+            <ToastContainer />
+
             <Body>
                 <form className={styles.formContainer} onSubmit={(e) => handleSubmit(e)}>
                     <Input name="name" label="Nome" required />
-                    <Input name="cpf" label="CPF" maxLength={11} required />
+                    <Input name="cpf" label="CPF" type="number" minLength={11} maxLength={11} required />
 
                     <Button label="Criar" />
                 </form>

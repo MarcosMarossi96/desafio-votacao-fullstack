@@ -3,6 +3,12 @@ type AssociateProps = {
     height: string;
 }
 
+/**
+ * @description Icon representing an associate registered on the platform.
+ * @param height Height of the icon.
+ * @param width Width of the icon.
+ * @returns {JSX.Element} Associate Icon.
+ */
 const AssociateIcon = ({ height, width }: AssociateProps) => {
     return (
         <svg width={width} height={height} viewBox="0 0 64 64" id="TwoTone" xmlns="http://www.w3.org/2000/svg">

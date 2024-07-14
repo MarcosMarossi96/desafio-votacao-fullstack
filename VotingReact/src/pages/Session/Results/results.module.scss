@@ -1,23 +1,21 @@
-.agendaContent {
-    margin: 8px;
-    border: 1px solid var(--primary-color);
-    padding: 16px;
-    border-radius: 8px;
+.resultsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
 
     h3 {
         font-size: 1rem;
         text-transform: uppercase;
+        margin-top: 24px;
         color: var(--primary-text-color);
     }
 
 
     p {
         font-size: 1rem;
-        margin-top: 8px;
+        margin: 8px 0px 20px 0px;
         color: var(--secondary-text-color);
-    }
-
-    button {
-        margin-top: 8px;
     }
 }

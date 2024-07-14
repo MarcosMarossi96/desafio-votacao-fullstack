@@ -5,6 +5,9 @@ import Agenda from './pages/Agenda';
 import Associate from './pages/Associate';
 import NewAgenda from './pages/Agenda/New';
 import NewAssociate from './pages/Associate/New';
+import Session from './pages/Session';
+import 'react-toastify/dist/ReactToastify.css';
+import Results from './pages/Session/Results';
 
 function App() {
     return (
@@ -15,6 +18,8 @@ function App() {
                 <Route path="/nova-pauta" element={<NewAgenda />} />
                 <Route path="/associado" element={<Associate />} />
                 <Route path="/novo-associado" element={<NewAssociate />} />
+                <Route path="/sessao/:id" element={<Session />} />
+                <Route path="/resultado/:id" element={<Results />} />
             </Routes>
         </BrowserRouter>
     )

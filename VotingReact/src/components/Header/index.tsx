@@ -7,6 +7,12 @@ type HeaderProps = {
     pageTitle: string;
 }
 
+/**
+ * @description Displays a header with a navigation menu and a page title.
+ * @param children Optional children element.
+ * @param pageTitle The title of the page displayed in the header.
+ * @returns {JSX.Element} Returns a React component representing a header with navigation and a title.
+ */
 const Header = ({ children, pageTitle }: HeaderProps) => {
     return (
         <header>

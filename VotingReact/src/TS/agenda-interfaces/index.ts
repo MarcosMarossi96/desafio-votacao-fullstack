@@ -1,3 +1,5 @@
+import { VoteDTO } from "../vote-interfaces";
+
 type Link = {
     href: string;
 }
@@ -6,10 +8,11 @@ type Links = {
     self: Link;
 }
 
-type AgendaDTO = {
+export type AgendaDTO = {
     id: number;
     title: string;
     description: string;
+    vote: VoteDTO;
     _links: Links;
 }
 

@@ -7,6 +7,9 @@ import TextArea from "../../../components/TextArea";
 import api from "../../../services";
 import Header from "../../../components/Header";
 import Body from "../../../components/Body";
+import { AxiosError } from "axios";
+import { ApiErrorMessage } from "../../../TS/error-interfaces";
+import { ToastContainer, toast } from 'react-toastify';
 
 const NewAgenda = () => {
     const navigate = useNavigate();
@@ -22,13 +25,22 @@ const NewAgenda = () => {
         });
 
         await api.post('/agenda', requestObject)
-
-        navigate("/pauta")
+            .then(() => {
+                navigate("/pauta")
+            })
+            .catch((error: AxiosError<ApiErrorMessage>) => {
+                const message = error?.response?.data.message || 'Ocorreu um erro no processamento!'
+                toast(message, {
+                    type: 'error',
+                })
+            })
     }
 
     return (
         <div>
             <Header pageTitle="Nova pauta" />
+
+            <ToastContainer />
 
             <Body>
                 <form className={styles.formContainer} onSubmit={(e) => handleSubmit(e)}>

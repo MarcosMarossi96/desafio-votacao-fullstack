@@ -6,9 +6,20 @@ type PaginationProps = {
     onPageChange: (page: number) => void;
 }
 
+/**
+ * @description Data pagination manager.
+ * @param currentPage Current page.
+ * @param totalPages Total pages than exists in REST API.
+ * @param onPageChange Change the current page to the previous or next one.
+ * @returns {JSX.Element} Pagination Manager.
+ */
 const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) => {
     const pages = []
 
+    /**
+     * Builds an array of buttons representing pagination pages.
+     * Each button is rendered based on the total number of pages and the current page.
+     */
     for (let i = 0; i < totalPages; i++) {
         pages.push(
             <button
@@ -20,6 +31,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
             </button>,
         );
     }
+
     return (
         <div className={styles.pagination}>
             <button

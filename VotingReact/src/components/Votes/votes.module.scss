@@ -1,0 +1,27 @@
+.voteContainer {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.baseContainer {
+    display: flex;
+    gap: 12px;
+    padding: 4px;
+}
+
+.positiveContainer {
+    border: 1px solid var(--green-color);
+
+    svg {
+        color: var(--green-color);
+    }
+}
+
+.negativeContainer {
+    border: 1px solid var(--red-color);
+
+    svg {
+        color: var(--red-color);
+    }
+}

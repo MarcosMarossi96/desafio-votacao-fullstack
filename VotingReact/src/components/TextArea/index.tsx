@@ -6,6 +6,12 @@ interface TextProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
     name: string;
 }
 
+/**
+ * @description Custom text area component
+ * @param label Text to identificate field (label)
+ * @param rest Default textarea Props
+ * @returns {JSX.Element} HTML textarea
+ */
 const TextArea = ({ label, name, ...rest }: TextProps) => {
     return (
         <div>
