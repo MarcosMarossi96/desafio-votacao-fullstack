@@ -33,11 +33,11 @@ jobs:
         cache: maven
         
     - name: Build application JAR
-      working-directory: ./desafio-votacao-fullstack/VotingAPI
+      working-directory: ./
       run: mvn clean package
 
     - name: Build docker compose
-      working-directory: ./desafio-votacao-fullstack
+      working-directory: ./
       run: docker compose build
 
     - name: Push to Dicker Hub Container Registry
