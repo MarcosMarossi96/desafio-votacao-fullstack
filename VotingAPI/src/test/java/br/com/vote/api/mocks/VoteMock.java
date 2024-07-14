@@ -41,12 +41,12 @@ public class VoteMock {
 
 	public VoteForm mockForm(Integer number) {
 		VoteForm form = new VoteForm();
-		form.setCpf(associateMock.mockEntity().getCpf());
+		form.setCpf(associateMock.mockEntity(5).getCpf());
 		form.setCurrentDate(new Date());
-		form.setSessionId(sessionMock.mockEntity(1).getId());
+		form.setSessionId(sessionMock.mockEntity(number).getId());
 		form.setVote(true);		
 
 		return form;
-	}
 
+	}
 }

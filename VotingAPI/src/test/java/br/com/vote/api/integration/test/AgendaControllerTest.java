@@ -61,8 +61,9 @@ public class AgendaControllerTest extends GenericTestContainer {
 		List<AgendaDTO> agendas = wrapper.getEmbedded().getAgendas();
 		
 		assertFalse(agendas.isEmpty());
-		assertEquals(1, agendas.size());
-		assertFalse(agendas.isEmpty());	
+		
+		AgendaDTO agendaDTO = agendas.get(0);
+		assertEquals(1L, agendaDTO.getId());
 	}
 
 	@Test

@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.vote.api.controller.advice.ApiErrorMessage;
 import br.com.vote.api.dto.AssociateDTO;
-import br.com.vote.api.dto.CreatedSessionDTO;
+import br.com.vote.api.dto.CreatedDTO;
 import br.com.vote.api.dto.SessionDTO;
 import br.com.vote.api.form.SessionForm;
-import br.com.vote.api.model.Session;
 import br.com.vote.api.service.SessionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -39,7 +38,7 @@ public class SessionController {
 	@PostMapping
 	@Operation(summary = "Create a new voting section", description = "Create a new voting section", tags = { "Session" }, responses = {
 			@ApiResponse(responseCode = "201", description = "Success", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = Session.class)) }),
+					@Content(mediaType = "application/json", schema = @Schema(implementation = CreatedDTO.class)) }),
 			@ApiResponse(responseCode = "400", description = "Bad Request", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorMessage.class)) }),
 			@ApiResponse(responseCode = "404", description = "Not Found", content = {
@@ -49,7 +48,7 @@ public class SessionController {
 	public ResponseEntity<?> createNewAssociate(@Valid @RequestBody SessionForm form) {
 		logger.info("Initializing the creation of a new session.");
 		
-		CreatedSessionDTO newSession = sessionService.createNewSession(form);
+		CreatedDTO newSession = sessionService.createNewSession(form);
 		
 		logger.info("Successfully finalizing session creation.");
 		return new ResponseEntity<>(newSession, HttpStatus.CREATED);		

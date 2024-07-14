@@ -45,6 +45,7 @@ public class SessionMock {
 		SessionForm form = new SessionForm();
 		form.setStart(new Date());
 		form.setEnd(getEndDate());
+		
 		form.setAgendaId(Long.valueOf(number));
 
 		return form;

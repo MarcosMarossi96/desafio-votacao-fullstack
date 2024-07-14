@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.vote.api.controller.advice.ApiErrorMessage;
 import br.com.vote.api.dto.AgendaDTO;
+import br.com.vote.api.dto.CreatedDTO;
 import br.com.vote.api.form.AgendaForm;
 import br.com.vote.api.service.AgendaService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -43,7 +44,8 @@ public class AgendaController {
 
 	@PostMapping
 	@Operation(summary = "Create a new agenda", description = "Create a new agenda", tags = { "Agenda" }, responses = {
-			@ApiResponse(responseCode = "201", description = "Success"),
+			@ApiResponse(responseCode = "201", description = "Success", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = CreatedDTO.class)) }),
 			@ApiResponse(responseCode = "400", description = "Bad Request", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorMessage.class)) }),			
 			@ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
@@ -51,10 +53,10 @@ public class AgendaController {
 	public ResponseEntity<?> createNewAgenda(@Valid @RequestBody AgendaForm form) {
 		logger.info("Initializing the creation of a new agenda.");
 		
-		agendaService.createNewAgenda(form);
+		CreatedDTO createdDTO = agendaService.createNewAgenda(form);
 		
 		logger.info("Successfully finalizing agenda creation.");
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		return new ResponseEntity<>(createdDTO, HttpStatus.CREATED);
 	}
 
 	@GetMapping

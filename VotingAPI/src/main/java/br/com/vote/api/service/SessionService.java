@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.vote.api.dto.AgendaDTO;
-import br.com.vote.api.dto.CreatedSessionDTO;
+import br.com.vote.api.dto.CreatedDTO;
 import br.com.vote.api.dto.SessionDTO;
 import br.com.vote.api.exception.ResourceNotFoundException;
 import br.com.vote.api.exception.SessionException;
@@ -31,7 +31,7 @@ public class SessionService {
 		return null;
 	}
 
-	public CreatedSessionDTO createNewSession(SessionForm form) {
+	public CreatedDTO createNewSession(SessionForm form) {
 		Optional<Agenda> agenda = agendaRepository.findById(form.getAgendaId());
 
 		if (!agenda.isPresent()) {
@@ -47,7 +47,7 @@ public class SessionService {
 		Session session = sessionRepository.save(new Session(agenda.get(), form.getStart(), form.getEnd()));
 		session.setAgenda(agenda.get());
 		
-		CreatedSessionDTO createdSession = CustomModelMapper.parseObject(session, CreatedSessionDTO.class);
+		CreatedDTO createdSession = CustomModelMapper.parseObject(session, CreatedDTO.class);
 
 		return createdSession;
 	}

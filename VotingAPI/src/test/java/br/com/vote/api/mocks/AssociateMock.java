@@ -22,9 +22,9 @@ public class AssociateMock {
         return associates;
 	}	
 
-	private Associate mockEntity(Integer number) {
+	public Associate mockEntity(Integer number) {
 		Associate associate = new Associate();
-        associate.setCpf("21212121211");
+		associate.setCpf("2121212121" + number);
         associate.setName("Associate" + number);
         
         return associate;
@@ -36,7 +36,7 @@ public class AssociateMock {
 	
 	public AssociateForm mockForm(Integer number) {
 		AssociateForm form = new AssociateForm();
-		form.setCpf("21212121211");
+		form.setCpf("2121212121" + number);
 		form.setName("Associate" + number);
         
 		return form;

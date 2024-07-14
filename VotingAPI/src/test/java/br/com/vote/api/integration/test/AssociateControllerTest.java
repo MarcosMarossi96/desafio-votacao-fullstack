@@ -73,7 +73,7 @@ public class AssociateControllerTest extends GenericTestContainer {
 		
 		AssociateDTO vo = mapper.readValue(responseObject.getResponse().getContentAsString(), AssociateDTO.class);
 		
-		assertEquals("21212121211", vo.getCpf());		
+		assertEquals("21212121210", vo.getCpf());		
 		assertEquals(1, vo.getId());	
 	}
 	

@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.vote.api.controller.AgendaController;
 import br.com.vote.api.dto.AgendaDTO;
+import br.com.vote.api.dto.CreatedDTO;
 import br.com.vote.api.dto.VoteDTO;
 import br.com.vote.api.exception.ResourceNotFoundException;
 import br.com.vote.api.form.AgendaForm;
@@ -39,9 +40,11 @@ public class AgendaService {
 	@Autowired
 	private PagedResourcesAssembler<AgendaDTO> assembler;
 
-	public void createNewAgenda(AgendaForm form) {
+	public CreatedDTO createNewAgenda(AgendaForm form) {
 		Agenda agenda = new Agenda(form.getTitle(), form.getDescription());
-		agendaRepository.save(agenda);
+		Agenda savedAgenda = agendaRepository.save(agenda);
+		
+		return new CreatedDTO(savedAgenda.getId());
 	}
 
 	public PagedModel<EntityModel<AgendaDTO>> findAll(Pageable pageable) {
