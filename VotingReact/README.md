@@ -13,14 +13,14 @@ Projeto para o desafio Fullstack para votações cooperativas.
 Instruções sobre como instalar e configurar o ambiente para rodar o projeto.
 
 ```bash
-# Clone o repositório
+#Clone o repositório
 git clone https://github.com/MarcosMarossi96/desafio-votacao-fullstack
 ```
 
-# Entre no diretório do projeto
+### Entre no diretório do projeto
 cd VotingReact
 
-# Instale as dependências
+### Instale as dependências
 
 ```bash
 npm install
