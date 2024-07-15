@@ -14,13 +14,17 @@ Instruções sobre como instalar e configurar o ambiente para rodar o projeto.
 
 ```bash
 # Clone o repositório
-[git clone https://github.com/seu-usuario/nome-do-repositorio.git](https://github.com/MarcosMarossi96/desafio-votacao-fullstack)
+git clone https://github.com/MarcosMarossi96/desafio-votacao-fullstack
+```
 
 # Entre no diretório do projeto
 cd VotingReact
 
 # Instale as dependências
+
+```bash
 npm install
+```
 
 ## Uso
 
