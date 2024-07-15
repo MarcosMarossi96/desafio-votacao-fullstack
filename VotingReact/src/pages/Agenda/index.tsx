@@ -60,7 +60,7 @@ const Agenda = () => {
      */
     const handleSession = (id: number) => {
         const initialDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
-        const finalDate = moment(new Date()).add(6000, 'minutes').format('YYYY-MM-DD HH:mm:ss');
+        const finalDate = moment(new Date()).add(5, 'minutes').format('YYYY-MM-DD HH:mm:ss');
 
         const requestBody: RequestSession = {
             start: initialDate,
