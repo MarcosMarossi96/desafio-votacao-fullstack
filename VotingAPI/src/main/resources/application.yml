@@ -21,4 +21,4 @@ application:
 
 server:
   servlet.context-path: /vote/v1
-  port: 80
+  port: 8080
