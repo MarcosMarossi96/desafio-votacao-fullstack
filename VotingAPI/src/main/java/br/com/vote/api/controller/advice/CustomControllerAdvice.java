@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
 import br.com.vote.api.exception.AssociateException;
+import br.com.vote.api.exception.ClientFakeException;
 import br.com.vote.api.exception.ResourceNotFoundException;
 import br.com.vote.api.exception.SessionException;
 import br.com.vote.api.exception.VoteException;
@@ -84,6 +85,16 @@ public class CustomControllerAdvice {
 		logger.error(message);
 		
 		return new ResponseEntity<>(em, status);		
-	}	
+	}
+	
+	@ExceptionHandler(ClientFakeException.class)
+	public ResponseEntity<ApiErrorMessage> handleClientFakeException(Exception ex, WebRequest request) {
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		
+		ApiErrorMessage em = new ApiErrorMessage(ex.getMessage(), request.getDescription(false), new Date(), String.valueOf(status.value()));
+		logger.error(ex.getMessage());
+		
+		return new ResponseEntity<>(em, status);		
+	}
 
 }

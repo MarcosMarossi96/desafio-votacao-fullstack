@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.vote.api.controller.advice.ApiErrorMessage;
 import br.com.vote.api.dto.AssociateDTO;
+import br.com.vote.api.dto.ClientFakeDTO;
 import br.com.vote.api.form.AssociateForm;
+import br.com.vote.api.form.ClientFakeForm;
 import br.com.vote.api.service.AssociateService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -96,6 +98,23 @@ public class AssociateController {
 		AssociateDTO associateDTO = associateService.findById(id);
 		
 		logger.info("Successfully finalizing the associate search by ID.");
+		return associateDTO;
+	}
+	
+	@PostMapping(path = "/client")
+	@Operation(summary = "Client for CPF consultation", description = "Client for CPF consultation", tags = { "Associate" }, responses = {
+			@ApiResponse(responseCode = "200", description = "Success", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = ClientFakeDTO.class)) }),
+			@ApiResponse(responseCode = "400", description = "Bad Request", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorMessage.class)) }),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorMessage.class)) }), })
+	public ClientFakeDTO consultation(@RequestBody ClientFakeForm form) {
+		logger.info("Initializing the validation if the CPF is valid.");
+		
+		ClientFakeDTO associateDTO = associateService.consultation(form);
+		
+		logger.info("Finalizing the validation if the CPF is valid");
 		return associateDTO;
 	}
 	
