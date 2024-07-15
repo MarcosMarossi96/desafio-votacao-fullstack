@@ -1,6 +1,6 @@
 spring:
  datasource:
-    url: jdbc:mysql://voting-api-db.ctscyewa6ar2.us-east-2.rds.amazonaws.com:3306/voting_api_db?useTimezone=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/voting_api_db?useTimezone=true&serverTimezone=UTC
     username: docker
     password: dockerpass123
     driver-class-name: com.mysql.cj.jdbc.Driver

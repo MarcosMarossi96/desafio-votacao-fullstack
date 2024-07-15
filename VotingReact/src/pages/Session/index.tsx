@@ -102,6 +102,14 @@ const Session = () => {
             })
     }
 
+    /**
+     * @description Change expire session label
+     * @returns {string} Expire session text
+     */
+    const getText = () => {
+        return disable ? 'Sessão encerrada em' : 'Sessão encerra em'
+    }
+
     return (
         <div>
             <ToastContainer />
@@ -118,10 +126,10 @@ const Session = () => {
                             </div>
 
                             <div className={styles.expireSession}>
-                                <p>Sessão encerra em {sessionDTO?.end}</p>
+                                <p>{getText()} {sessionDTO?.end}</p>
                             </div>
 
-                            {!disable ?
+                            {!disable &&
                                 <>
                                     <form className={styles.formContainer} onSubmit={e => handleSubmit(e)}>
                                         <div className={styles.selectContainer}>
@@ -148,9 +156,6 @@ const Session = () => {
 
                                         <Button label="Votar" />
                                     </form>
-                                </>
-                                :
-                                <>
                                 </>
                             }
                         </div>
