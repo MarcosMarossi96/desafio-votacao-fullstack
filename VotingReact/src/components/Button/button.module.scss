@@ -12,11 +12,11 @@
     }
 
     &:disabled {
-        background-color: #ccc;
+        background-color: var(--disable-color);
         cursor: not-allowed;
 
         &:hover {
-            background-color: #ccc;
+            background-color: var(--disable-color);
         }
     }
 }

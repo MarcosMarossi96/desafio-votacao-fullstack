@@ -40,11 +40,12 @@ const Input = ({ label, name, ...rest }: InputProps) => {
             <label htmlFor={name} className={styles.inputLabel}>{label}</label>
             <input
                 className={styles.inputField}
-                name={name}
+                id={name}
                 type="text"
                 {...rest}
                 value={value}
                 onChange={e => handleChange(e)}
+                data-testid={name}
             />
         </div>
     )
